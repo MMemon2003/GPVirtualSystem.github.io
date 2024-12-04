@@ -344,6 +344,18 @@ fetch('https://gp-onlineservices-080c57ef7c1d.herokuapp.com/', {
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
+	
+fetch('https://gp-onlineservices-080c57ef7c1d.herokuapp.com/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ key: 'value' }), // Include body only for POST/PUT
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
 
 
 
