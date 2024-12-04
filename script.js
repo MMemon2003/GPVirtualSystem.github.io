@@ -307,5 +307,44 @@ function generateYearlyReport() {
             return false; // Prevent form submission
         }
 
+document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const patientName = document.getElementById('patientName').value;
+    const medicalID = document.getElementById('medicalID').value;
+    const patientPassword = document.getElementById('patientPassword').value;
+
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ patientName, medicalID, patientPassword }),
+    });
+
+    const responseData = await response.json();
+
+    const responseMessage = document.getElementById('responseMessage');
+    if (response.ok) {
+        responseMessage.textContent = responseData.message;
+        responseMessage.style.color = 'green';
+    } else {
+        responseMessage.textContent = responseData.message;
+        responseMessage.style.color = 'red';
+    }
+});
+
+fetch('https://gp-onlineservices-080c57ef7c1d.herokuapp.com/', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    // Add any other necessary headers here
+  },
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+
 
 
