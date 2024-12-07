@@ -1,3 +1,30 @@
+// Function to determine which PHP file to fetch based on userType
+function login(userType, username, password) {
+  const url = userType === 'doctor' ? 'http://localhost:3300/project/doctor_login.php' : 'http://localhost:3300/project/patient_login.php';
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: username,
+      password: password
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Response:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+// Example usage
+login('doctor', 'testuser', 'testpass'); // For doctor login
+login('patient', 'testuser', 'testpass'); // For patient login
+
 // Get references to elements
 const welcomePage = document.getElementById('welcome-page');
 const loginPage = document.getElementById('login-page');
